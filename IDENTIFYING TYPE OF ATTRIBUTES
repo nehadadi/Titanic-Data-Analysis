@@ -1,0 +1,84 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPvzVdm3loSn3XgqfySg/Bm",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/nehadadi/Titanic-Data-Analysis/blob/main/IDENTIFYING%20TYPE%20OF%20ATTRIBUTES\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "# Read dataset\n",
+        "df = pd.read_csv(\"Titanic-Dataset (1).csv\")\n",
+        "\n",
+        "numeric = []\n",
+        "nominal = []\n",
+        "binary = []\n",
+        "\n",
+        "for col in df.columns:\n",
+        "    if df[col].nunique() == 2:\n",
+        "        binary.append(col)\n",
+        "    elif df[col].dtype == 'object':\n",
+        "        nominal.append(col)\n",
+        "    else:\n",
+        "        numeric.append(col)\n",
+        "\n",
+        "print(\"Binary Attributes:\")\n",
+        "print(binary)\n",
+        "\n",
+        "print(\"\\nNominal Attributes:\")\n",
+        "print(nominal)\n",
+        "\n",
+        "print(\"\\nNumeric Attributes:\")\n",
+        "print(numeric)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Z1RJzFRH4FGd",
+        "outputId": "33e8905f-d008-4a78-f71b-9ea890e5c697"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Binary Attributes:\n",
+            "['Survived', 'Sex']\n",
+            "\n",
+            "Nominal Attributes:\n",
+            "['Name', 'Ticket', 'Cabin', 'Embarked']\n",
+            "\n",
+            "Numeric Attributes:\n",
+            "['PassengerId', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
