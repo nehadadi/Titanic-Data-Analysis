@@ -1,0 +1,102 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNU5mqliWz0osC3mcBuY7uB",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/nehadadi/Titanic-Data-Analysis/blob/main/simalirity%20of%20numerical%20type\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "\n",
+        "# Read the Titanic dataset\n",
+        "df = pd.read_csv(\"Titanic-Dataset (1).csv\")\n",
+        "\n",
+        "# Select numerical attributes (Age and Fare) of the first two passengers\n",
+        "p1 = df.loc[0, [\"Age\", \"Fare\"]]\n",
+        "p2 = df.loc[1, [\"Age\", \"Fare\"]]\n",
+        "\n",
+        "# Fill missing values with column mean (if any)\n",
+        "p1 = p1.fillna(df[[\"Age\", \"Fare\"]].mean())\n",
+        "p2 = p2.fillna(df[[\"Age\", \"Fare\"]].mean())\n",
+        "\n",
+        "# Calculate Euclidean Distance\n",
+        "distance = np.sqrt(((p1 - p2) ** 2).sum())\n",
+        "\n",
+        "# Calculate Similarity\n",
+        "similarity = 1 / (1 + distance)\n",
+        "\n",
+        "# Display Results\n",
+        "print(\"Passenger 1:\")\n",
+        "print(p1)\n",
+        "\n",
+        "print(\"\\nPassenger 2:\")\n",
+        "print(p2)\n",
+        "\n",
+        "print(\"\\nEuclidean Distance =\", round(distance, 2))\n",
+        "print(\"Similarity =\", round(similarity, 4))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Z1RJzFRH4FGd",
+        "outputId": "2d986fa5-e66e-4f4f-8876-fd2b05cd14b4"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Passenger 1:\n",
+            "Age     22.00\n",
+            "Fare     7.25\n",
+            "Name: 0, dtype: float64\n",
+            "\n",
+            "Passenger 2:\n",
+            "Age     38.0000\n",
+            "Fare    71.2833\n",
+            "Name: 1, dtype: float64\n",
+            "\n",
+            "Euclidean Distance = 66.0\n",
+            "Similarity = 0.0149\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/tmp/ipykernel_831/2152147495.py:12: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n",
+            "  p1 = p1.fillna(df[[\"Age\", \"Fare\"]].mean())\n",
+            "/tmp/ipykernel_831/2152147495.py:13: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n",
+            "  p2 = p2.fillna(df[[\"Age\", \"Fare\"]].mean())\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
